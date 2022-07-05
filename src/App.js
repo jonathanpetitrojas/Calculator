@@ -6,33 +6,42 @@ import BotonClear from './componentes/BotonClear';
 import { useState } from 'react';
 import { evaluate } from 'mathjs';
 
+
+
 function App() {
+
+  const [input, setInput] = useState('');
+
+  const calcularResultado = () => {
+    if (esOperador(input.substr(-1))) { alert("Falta un valor en la pantalla para poder realizar la operacion.");}
+      else if (input) {
+      setInput(evaluate(input));} 
+        else{
+        alert("Para realizar un calculo debe ingresar los valores primero.");}
+  }
+
   const esOperador = value => { 
     return isNaN(value) && (value !== '.') && (value !== '=');
   };
-
-  const [input, setInput] = useState('');
 
   const agregarInput = val => {
      setInput(input + val) ; 
   };
 
   const agregarInputO = val => {
-    if (esOperador(input.substr(-1))) { alert("No puede agregar dos operadores seguidos.") } else { setInput(input + val) }; 
+    if (esOperador(input.substr(-1))) { alert("No puede agregar dos operadores seguidos."); } 
+      else { setInput(input + val) }; 
   };
 
   const agregarInputO2 = val => {
-    if (esOperador(input.substr(-1))) { alert("No puede agregar dos operadores seguidos.") }
+    if (esOperador(input.substr(-1))) { alert("No puede agregar dos operadores seguidos.") ;}
       else if (input === '') {alert("Para seleccionar este operador debe ingresar los valores primero.");}
         else { setInput(input + val) }; 
   };
 
-  const calcularResultado = () => {
-    if (input) {
-      setInput(evaluate(input));
-    } else{
-      alert("Para realizar un calculo debe ingresar los valores primero.");}
-  }
+ 
+
+
 
   return (
     <div className='App'>
