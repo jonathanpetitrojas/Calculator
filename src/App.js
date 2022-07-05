@@ -13,7 +13,7 @@ function App() {
   const [input, setInput] = useState('');
 
   const calcularResultado = () => {
-    if (esOperador(input.substr(-1))) { alert("Falta un valor en la pantalla para poder realizar la operacion.");}
+    if (esOperador(input.substring(input.length-1, input.length))) { alert("Falta un valor en la pantalla para poder realizar la operacion.");}
       else if (input) {
       setInput(evaluate(input));} 
         else{
@@ -29,12 +29,12 @@ function App() {
   };
 
   const agregarInputO = val => {
-    if (esOperador(input.substr(-1))) { alert("No puede agregar dos operadores seguidos."); } 
+    if (esOperador(input.substring(input.length-1, input.length))) { alert("No puede agregar dos operadores seguidos."); } 
       else { setInput(input + val) }; 
   };
 
   const agregarInputO2 = val => {
-    if (esOperador(input.substr(-1))) { alert("No puede agregar dos operadores seguidos.") ;}
+    if (esOperador(input.substring(input.length-1, input.length))) { alert("No puede agregar dos operadores seguidos.") ;}
       else if (input === '') {alert("Para seleccionar este operador debe ingresar los valores primero.");}
         else { setInput(input + val) }; 
   };
