@@ -18,7 +18,13 @@ function App() {
   };
 
   const agregarInputO = val => {
-    if (esOperador(input.substr(-1))) { alert() } else { setInput(input + val) }; 
+    if (esOperador(input.substr(-1))) { alert("No puede agregar dos operadores seguidos.") } else { setInput(input + val) }; 
+  };
+
+  const agregarInputO2 = val => {
+    if (esOperador(input.substr(-1))) { alert("No puede agregar dos operadores seguidos.") }
+      else if (input === '') {alert("Para seleccionar este operador debe ingresar los valores primero.");}
+        else { setInput(input + val) }; 
   };
 
   const calcularResultado = () => {
@@ -54,13 +60,13 @@ function App() {
           <Boton manejarClic= {agregarInput}>7</Boton>
           <Boton manejarClic= {agregarInput}>8</Boton>
           <Boton manejarClic= {agregarInput}>9</Boton>
-          <Boton manejarClic= {agregarInputO}>*</Boton>
+          <Boton manejarClic= {agregarInputO2}>*</Boton>
         </div>
         <div className='fila'>
           <Boton manejarClic= {calcularResultado}>=</Boton>
           <Boton manejarClic= {agregarInput}>0</Boton>
           <Boton manejarClic= {agregarInput}>.</Boton>
-          <Boton manejarClic= {agregarInputO}>/</Boton>
+          <Boton manejarClic= {agregarInputO2}>/</Boton>
         </div>
         <div className='fila'>
           <BotonClear manejarClear= {() => setInput('')}>
