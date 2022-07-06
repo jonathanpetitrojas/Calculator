@@ -28,13 +28,14 @@ function App() {
      setInput(input + val) ; 
   };
 
-  const agregarInputO = val => {
-    if (esOperador(input.substring(input.length-1, input.length))) { alert("No puede agregar dos operadores seguidos."); } 
+  const agregarInputO = val => { 
+    
+    if (esOperador(input.toString().substring(input.length-1, input.length))) { alert("No puede agregar dos operadores seguidos."); } 
       else { setInput(input + val) }; 
   };
 
   const agregarInputO2 = val => {
-    if (esOperador(input.substring(input.length-1, input.length))) { alert("No puede agregar dos operadores seguidos.") ;}
+    if (esOperador(input.toString().substring(input.length-1, input.length))) { alert("No puede agregar dos operadores seguidos.") ;}
       else if (input === '') {alert("Para seleccionar este operador debe ingresar los valores primero.");}
         else { setInput(input + val) }; 
   };
