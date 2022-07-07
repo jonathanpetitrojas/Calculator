@@ -9,13 +9,17 @@ import { evaluate } from "mathjs";
 function App() {
   const [input, setInput] = useState("");
 
+  const lastChar = (value) => {
+    return value.charAt(value.length - 1);
+  };
+
   const calcularResultado = () => {
-    if (esOperador(input.substring(input.length - 1, input.length))) {
+    if (esOperador(lastChar(input))) {
       alert("Falta un valor en la pantalla para poder realizar la operacion.");
     } else if (input) {
       setInput(evaluate(input));
     } else {
-      alert("Para realizar un calculo debe ingresar los valores primero.");
+      setInput("");
     }
   };
 
@@ -31,25 +35,15 @@ function App() {
     }
   };
 
-  const agregarInputO = (val) => {
-    if (
-      esOperador(input.toString().substring(input.length - 1, input.length))
-    ) {
-      alert("No puede agregar dos operadores seguidos.");
-    } else {
-      setInput(input + val);
-    }
+  const basicOp = (val) => {
+    setInput(input + val);
   };
 
-  const agregarInputO2 = (val) => {
-    if (
-      esOperador(input.toString().substring(input.length - 1, input.length))
-    ) {
-      alert("No puede agregar dos operadores seguidos.");
+  const opType2 = (val) => {
+    if (esOperador(lastChar(input.toString()))) {
+      setInput(input.slice(0, input.length - 1) + val);
     } else if (input === "") {
-      alert(
-        "Para seleccionar este operador debe ingresar los valores primero."
-      );
+      setInput(input);
     } else {
       setInput(input + val);
     }
@@ -70,28 +64,36 @@ function App() {
           <Boton manejarClic={agregarInput}>1</Boton>
           <Boton manejarClic={agregarInput}>2</Boton>
           <Boton manejarClic={agregarInput}>3</Boton>
-          <Boton manejarClic={agregarInputO}>+</Boton>
+          <Boton manejarClic={basicOp}>+</Boton>
         </div>
         <div className="fila">
           <Boton manejarClic={agregarInput}>4</Boton>
           <Boton manejarClic={agregarInput}>5</Boton>
           <Boton manejarClic={agregarInput}>6</Boton>
-          <Boton manejarClic={agregarInputO}>-</Boton>
+          <Boton manejarClic={basicOp}>-</Boton>
         </div>
         <div className="fila">
           <Boton manejarClic={agregarInput}>7</Boton>
           <Boton manejarClic={agregarInput}>8</Boton>
           <Boton manejarClic={agregarInput}>9</Boton>
-          <Boton manejarClic={agregarInputO2}>*</Boton>
+          <Boton manejarClic={opType2}>*</Boton>
         </div>
         <div className="fila">
           <Boton manejarClic={calcularResultado}>=</Boton>
           <Boton manejarClic={agregarInput}>0</Boton>
           <Boton manejarClic={agregarInput}>.</Boton>
-          <Boton manejarClic={agregarInputO2}>/</Boton>
+          <Boton manejarClic={opType2}>/</Boton>
         </div>
         <div className="fila">
           <BotonClear manejarClear={() => setInput("")}>Clear</BotonClear>
+          <Boton
+            manejarClic={() => {
+              let x = input.toString();
+              setInput(x.slice(0, x.length - 1));
+            }}
+          >
+            delete
+          </Boton>
         </div>
       </div>
     </div>
