@@ -1,13 +1,13 @@
 import React from "react";
-import "../hojas-de-estilo/Boton.css";
-function Boton(props) {
-  const esOperador = (valor) => {
+import "../hojas-de-estilo/Button.css";
+function Button(props) {
+  const itsaOperator = (valor) => {
     return isNaN(valor) && valor !== "." && valor !== "=";
   };
   return (
     <div
-      className={`boton-contenedor ${
-        esOperador(props.children) ? "operador" : ""
+      className={`button-container ${
+        itsaOperator(props.children) ? "operator" : ""
       }`.trimEnd()}
       onClick={() => props.manejarClic(props.children)}
     >
@@ -16,4 +16,4 @@ function Boton(props) {
   );
 }
 
-export default Boton;
+export default Button;

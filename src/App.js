@@ -1,8 +1,8 @@
 import "./App.css";
 import freecodecamplogo from "./imagenes/freecodecamp-logo.png";
-import Boton from "./componentes/Boton";
-import Pantalla from "./componentes/Pantalla";
-import BotonClear from "./componentes/BotonClear";
+import Button from "./componentes/Button";
+import Display from "./componentes/Display";
+import ClearButton from "./componentes/ClearButton";
 import { useState } from "react";
 import { evaluate } from "mathjs";
 
@@ -10,12 +10,12 @@ function App() {
   const [input, setInput] = useState("");
 
   const lastChar = (value) => {
-    return value.charAt(value.length - 1);
+    return value.slice(- 1);
   };
 
-  const calcularResultado = () => {
-    if (esOperador(lastChar(input))) {
-      alert("Falta un valor en la pantalla para poder realizar la operacion.");
+  const calculateResult = () => {
+    if (itsaOperator(lastChar(input))) {
+      alert("There is a missing value on the screen to perform the operation.");
     } else if (input) {
       setInput(evaluate(input));
     } else {
@@ -23,11 +23,11 @@ function App() {
     }
   };
 
-  const esOperador = (value) => {
-    return isNaN(value) && value !== "." && value !== "=";
+  const itsaOperator = (value) => {
+    return ["+","-","*","/"].includes(value);
   };
 
-  const agregarInput = (val) => {
+  const addInput = (val) => {
     if (typeof input === "number") {
       setInput(val);
     } else {
@@ -35,12 +35,12 @@ function App() {
     }
   };
 
-  const basicOp = (val) => {
+  const basicOperator = (val) => {
     setInput(input + val);
   };
 
-  const opType2 = (val) => {
-    if (esOperador(lastChar(input.toString()))) {
+  const operatorType2 = (val) => {
+    if (itsaOperator(lastChar(input.toString()))) {
       setInput(input.slice(0, input.length - 1) + val);
     } else if (input === "") {
       setInput(input);
@@ -51,49 +51,49 @@ function App() {
 
   return (
     <div className="App">
-      <div className="freecodecamp-logo-contenedor">
+      <div className="freecodecamp-logo-container">
         <img
           src={freecodecamplogo}
           className="freecodecamp-logo"
-          alt="logo de freecodecamp"
+          alt="freecodecamplogo"
         />
       </div>
-      <div className="contenedor-calculadora">
-        <Pantalla input={input} />
-        <div className="fila">
-          <Boton manejarClic={agregarInput}>1</Boton>
-          <Boton manejarClic={agregarInput}>2</Boton>
-          <Boton manejarClic={agregarInput}>3</Boton>
-          <Boton manejarClic={basicOp}>+</Boton>
+      <div className="calculator-container">
+        <Display input={input} />
+        <div className="row">
+          <Button handleClick={addInput}>1</Button>
+          <Button handleClick={addInput}>2</Button>
+          <Button handleClick={addInput}>3</Button>
+          <Button handleClick={basicOperator}>+</Button>
         </div>
-        <div className="fila">
-          <Boton manejarClic={agregarInput}>4</Boton>
-          <Boton manejarClic={agregarInput}>5</Boton>
-          <Boton manejarClic={agregarInput}>6</Boton>
-          <Boton manejarClic={basicOp}>-</Boton>
+        <div className="row">
+          <Button handleClick={addInput}>4</Button>
+          <Button handleClick={addInput}>5</Button>
+          <Button handleClick={addInput}>6</Button>
+          <Button handleClick={basicOperator}>-</Button>
         </div>
-        <div className="fila">
-          <Boton manejarClic={agregarInput}>7</Boton>
-          <Boton manejarClic={agregarInput}>8</Boton>
-          <Boton manejarClic={agregarInput}>9</Boton>
-          <Boton manejarClic={opType2}>*</Boton>
+        <div className="row">
+          <Button handleClick={addInput}>7</Button>
+          <Button handleClick={addInput}>8</Button>
+          <Button handleClick={addInput}>9</Button>
+          <Button handleClick={operatorType2}>*</Button>
         </div>
-        <div className="fila">
-          <Boton manejarClic={calcularResultado}>=</Boton>
-          <Boton manejarClic={agregarInput}>0</Boton>
-          <Boton manejarClic={agregarInput}>.</Boton>
-          <Boton manejarClic={opType2}>/</Boton>
+        <div className="row">
+          <Button handleClick={calculateResult}>=</Button>
+          <Button handleClick={addInput}>0</Button>
+          <Button handleClick={addInput}>.</Button>
+          <Button handleClick={operatorType2}>/</Button>
         </div>
-        <div className="fila">
-          <BotonClear manejarClear={() => setInput("")}>Clear</BotonClear>
-          <Boton
-            manejarClic={() => {
+        <div className="row">
+          <ClearButton handleClear={() => setInput("")}>Clear</ClearButton>
+          <Button
+            handleClick={() => {
               let x = input.toString();
               setInput(x.slice(0, x.length - 1));
             }}
           >
             delete
-          </Boton>
+          </Button>
         </div>
       </div>
     </div>
