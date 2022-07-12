@@ -14,7 +14,7 @@ function App() {
   };
 
   const calculateResult = () => {
-    if (itsaOperator(lastChar(input))) {
+    if (isOperator(lastChar(input))) {
       alert("There is a missing value on the screen to perform the operation.");
     } else if (input) {
       setInput(evaluate(input));
@@ -23,7 +23,7 @@ function App() {
     }
   };
 
-  const itsaOperator = (value) => {
+  const isOperator = (value) => {
     return ["+","-","*","/"].includes(value);
   };
 
@@ -40,7 +40,7 @@ function App() {
   };
 
   const operatorType2 = (val) => {
-    if (itsaOperator(lastChar(input.toString()))) {
+    if (isOperator(lastChar(input.toString()))) {
       setInput(input.slice(0, input.length - 1) + val);
     } else if (input === "") {
       setInput(input);
