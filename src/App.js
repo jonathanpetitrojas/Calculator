@@ -1,8 +1,8 @@
 import "./App.css";
 import freecodecamplogo from "./imagenes/freecodecamp-logo.png";
-import Button from "./componentes/Button";
-import Display from "./componentes/Display";
-import ClearButton from "./componentes/ClearButton";
+import { Button } from "./componentes/Button.js";
+import { Display } from "./componentes/Display.js";
+import { ClearButton } from "./componentes/ClearButton.js";
 import { useState } from "react";
 import { evaluate } from "mathjs";
 

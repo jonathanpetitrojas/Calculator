@@ -6,4 +6,4 @@ const ClearButton = (props) => (
   </div>
 );
 
-export default ClearButton;
+export { ClearButton };
